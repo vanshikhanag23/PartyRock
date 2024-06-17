@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Night Sky with Solar System</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000022; /* Darker blue-black for night sky */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: transparent;
+        }
+
+        .stars::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, #ffffff 1%, transparent 1.2%);
+            background-size: 3px 3px;
+            z-index: -1;
+            animation: animateStars 50s linear infinite;
+        }
+
+        .twinkling-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.2; }
+        }
+
+        @keyframes animateStars {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .solar-system {
+            position: relative;
+            width: 600px; /* Adjust size as needed */
+            height: 600px; /* Adjust size as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sun {
+            width: 80px;
+            height: 80px;
+            background-color: #ffcc00; /* Yellow */
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+        }
+
+        .planet {
+            width: 20px;
+            height: 20px;
+            background-color: #cccccc; /* Gray */
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .mercury { background-color: #b0b0b0; animation: orbitMercury 4s linear infinite; }
+        .venus { background-color: #ffcc99; animation: orbitVenus 7s linear infinite; }
+        .earth { background-color: #6699ff; animation: orbitEarth 10s linear infinite; }
+        .mars { background-color: #ff6666; animation: orbitMars 13s linear infinite; }
+        .jupiter { background-color: #ff9933; animation: orbitJupiter 16s linear infinite; }
+        .saturn { background-color: #ffcc66; animation: orbitSaturn 19s linear infinite; }
+        .uranus { background-color: #66ccff; animation: orbitUranus 22s linear infinite; }
+        .neptune { background-color: #6666ff; animation: orbitNeptune 25s linear infinite; }
+
+        .saturn::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ffcc66;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        @keyframes orbitMercury {
+            from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+        }
+
+        @keyframes orbitVenus {
+            from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+        }
+
+        @keyframes orbitEarth {
+            from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+
+        @keyframes orbitMars {
+            from { transform: rotate(0deg) translateX(130px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(130px) rotate(-360deg); }
+        }
+
+        @keyframes orbitJupiter {
+            from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+        }
+
+        @keyframes orbitSaturn {
+            from { transform: rotate(0deg) translateX(220px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(220px) rotate(-360deg); }
+        }
+
+        @keyframes orbitUranus {
+            from { transform: rotate(0deg) translateX(260px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
+        }
+
+        @keyframes orbitNeptune {
+            from { transform: rotate(0deg) translateX(300px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
+        }
+
+        .asteroid-belt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: orbitAsteroids 30s linear infinite;
+        }
+
+        .asteroid {
+            width: 5px;
+            height: 5px;
+            background-color: #888888;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        @keyframes orbitAsteroids {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .meteoroid {
+            width: 5px;
+            height: 5px;
+            background-color: #ff9900;
+            border-radius: 50%;
+            position: absolute;
+            animation: meteorShower 5s linear infinite;
+        }
+
+        @keyframes meteorShower {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100vw, 100vh); }
+        }
+
+        .galaxy {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+            animation: swirl 60s linear infinite;
+        }
+
+        .galaxy-1 {
+            width: 500px;
+            height: 500px;
+            top: 20%;
+            left: 15%;
+        }
+
+        .galaxy-2 {
+            width: 600px;
+            height: 600px;
+            top: 70%;
+            left: 80%;
+        }
+
+        .galaxy-3 {
+            width: 400px;
+            height: 400px;
+            top: 80%;
+            left: 10%;
+        }
+
+        .galaxy .planet {
+            position: absolute;
+            background-color: #ff9999;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+        }
+
+        .galaxy .planet-1 {
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 50%;
+            animation: rotate 8s linear infinite;
+        }
+
+        .galaxy .planet-2 {
+            top: 60%;
+            left: 60%;
+            transform-origin: 60% 60%;
+            animation: rotate 12s linear infinite;
+        }
+
+        .galaxy .planet-3 {
+            top: 70%;
+            left: 70%;
+            transform-origin: 70% 70%;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes swirl {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #linkButton {
+            position: absolute;
+            top: 5cm; /* 5 centimeters down from the top */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 30px 60px; /* Increased size */
+            background-color: #ff0000; /* Red color */
+            color: #ffffff; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2;
+            text-align: center;
+        }
+
+        #linkButton:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling-stars">
+        <div class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 50%; left: 60%; animation-delay: 2s;"></div>
+        <div class="star" style="top: 70%; left: 80%; animation-delay: 3s;"></div>
+        <div class="star" style="top: 90%; left: 10%; animation-delay: 4s;"></div>
+        <div class="star" style="top: 20%; left: 50%; animation-delay: 5s;"></div>
+    </div>
+    <div class="solar-system">
+        <div class="sun"></div>
+        <div class="planet mercury"></div>
+        <div class="planet venus"></div>
+        <div class="planet earth"></div>
+        <div class="planet mars"></div>
+        <div class="planet jupiter"></div>
+        <div class="planet saturn"></div>
+        <div class="planet uranus"></div>
+        <div class="planet neptune"></div>
+        <div class="asteroid-belt">
+            <div class="asteroid" style="top: 10%; left: 20%;"></div>
+            <div class="asteroid" style="top: 30%; left: 60%;"></div>
+            <div class="asteroid" style="top: 50%; left: 80%;"></div>
+            <div class="asteroid" style="top: 70%; left: 40%;"></div>
+            <div class="asteroid" style="top: 80%; left: 10%;"></div>
+            <div class="asteroid" style="top: 90%; left: 50%;"></div>
+        </div>
+        <div class="meteoroid" style="top: 10%; left: 20%;"></div>
+        <div class="meteoroid" style="top: 30%; left: 40%;"></div>
+        <div class="meteoroid" style="top: 50%; left: 60%;"></div>
+    </div>
+    <div class="galaxy galaxy-1">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+    </div>
+    <div class="galaxy galaxy-2">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+    </div>
+    <div class="galaxy galaxy-3">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+    </div>
+    <a id="linkButton" href="https://partyrock.aws/u/samirnayak05/Zr16mlTgn/Bollywood-Music-Maestro" target="_blank">Visit Link</a>
+</body>
+</html>
